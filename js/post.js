@@ -12,6 +12,33 @@ $("document").ready(() => {
     };
     postCharacterInfo(walleInfo);
   });
+
+  $("#postCharacterForm").submit((theEvent) => {
+    theEvent.preventDefault();
+
+    // retrieve what the user typed in the inputs (the input values)
+    const characterInfo = {
+      name: $("#postCharacterName").val(),
+      occupation: $("#postCharacterOccupation").val(),
+      weapon: $("#postCharacterWeapon").val()
+    };
+    postCharacterInfo(characterInfo);
+  });
+  $("#updateForm").submit((theEvent) => {
+    theEvent.preventDefault();
+
+    const updatedInfo = {
+      name: $("#updateName").val(),
+      weapon: $("updateWeapon").val(),
+      occupation: $("#updateOccupation").val()
+    };
+
+    // Retrieve the character id from the input
+    const characterId = $("#updateCharacterId").val();
+
+    // call the function that makes the AJAX request
+    updateCharacter(characterId, updatedInfo);
+  });
 });
 
 
