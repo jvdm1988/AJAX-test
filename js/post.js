@@ -29,7 +29,7 @@ $("document").ready(() => {
 
     const updatedInfo = {
       name: $("#updateName").val(),
-      weapon: $("updateWeapon").val(),
+      weapon: $("#updateWeapon").val(),
       occupation: $("#updateOccupation").val()
     };
 
@@ -40,6 +40,25 @@ $("document").ready(() => {
     updateCharacter(characterId, updatedInfo);
   });
 });
+
+function updateCharacter(myId, newInfo) {
+  $.ajax({
+    url: "https://ih-api.herokuapp.com/characters/" + myId,
+    method: "PATCH",
+    data: newInfo,
+    // newInfo is an object that contains:
+    // name, occupation & weapon properties
+
+    success: (responseFromApi) => {
+      alert("UPDATE SUCCESS!");
+      console.log(responseFromApi);
+    },
+    error:(errorFromApi) => {
+      alert("Sorry! Update Error");
+      console.log(errorFromApi);
+    }
+  });
+}
 
 
 function postCharacterInfo (newCharacterDetails) {
